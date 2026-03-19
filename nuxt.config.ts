@@ -8,6 +8,9 @@ export default defineNuxtConfig({
       title: 'Brewnite - Homebrew Script Generator',
       meta: [
         { name: 'description', content: 'Select homebrew packages and generate an install script' }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' }
       ]
     }
   }

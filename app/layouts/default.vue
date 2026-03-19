@@ -3,6 +3,14 @@
     <header>
       <h1>🍺 Brewnite</h1>
       <p class="subtitle">Select homebrew packages and generate an install script</p>
+      <a
+        href="https://buymeacoffee.com/mikkelthygesen"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bmc-button"
+      >
+        ☕ Buy me a coffee
+      </a>
     </header>
 
     <main>
@@ -32,5 +40,22 @@ header h1 {
 .subtitle {
   color: #888;
   font-size: 1.1rem;
+}
+
+.bmc-button {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: #ffdd00;
+  color: #000;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.bmc-button:hover {
+  background: #e5c700;
 }
 </style>

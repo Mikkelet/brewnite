@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="beer" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffdd00"/>
+      <stop offset="100%" stop-color="#f5a623"/>
+    </linearGradient>
+    <linearGradient id="foam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0e6d3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+
+  <!-- Mug body -->
+  <rect x="120" y="180" width="200" height="240" rx="20" fill="url(#beer)" opacity="0.9"/>
+
+  <!-- Beer liquid -->
+  <rect x="135" y="210" width="170" height="185" rx="12" fill="url(#beer)"/>
+
+  <!-- Foam -->
+  <ellipse cx="220" cy="195" rx="100" ry="30" fill="url(#foam)"/>
+  <circle cx="170" cy="180" r="22" fill="url(#foam)"/>
+  <circle cx="220" cy="175" r="25" fill="url(#foam)"/>
+  <circle cx="265" cy="182" r="20" fill="url(#foam)"/>
+
+  <!-- Mug handle -->
+  <path d="M320 220 Q380 220 380 290 Q380 360 320 360" fill="none" stroke="#f5a623" stroke-width="24" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Terminal cursor / code bracket -->
+  <text x="160" y="340" font-family="monospace" font-size="80" font-weight="bold" fill="#1a1a2e" opacity="0.6">&gt;_</text>
+
+  <!-- Bubbles -->
+  <circle cx="180" cy="350" r="6" fill="#ffee66" opacity="0.5"/>
+  <circle cx="230" cy="320" r="4" fill="#ffee66" opacity="0.4"/>
+  <circle cx="200" cy="280" r="5" fill="#ffee66" opacity="0.5"/>
+  <circle cx="250" cy="360" r="3" fill="#ffee66" opacity="0.3"/>
+</svg>
