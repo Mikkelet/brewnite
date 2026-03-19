@@ -10,15 +10,12 @@ export default defineEventHandler(async (event) => {
   }
 
   // Look up which names are formulae and which are casks
-  const formulaeRows = await sql`
-    SELECT name FROM formulae WHERE name = ANY(${pkgs})
-  `
-  const casksRows = await sql`
-    SELECT token AS name FROM casks WHERE token = ANY(${pkgs})
+  const rows = await sql`
+    SELECT name, is_cask FROM all_packages WHERE name = ANY(${pkgs})
   `
 
-  const formulaeSet = new Set(formulaeRows.map((r: any) => r.name))
-  const casksSet = new Set(casksRows.map((r: any) => r.name))
+  const formulaeSet = new Set(rows.filter((r: any) => !r.is_cask).map((r: any) => r.name))
+  const casksSet = new Set(rows.filter((r: any) => r.is_cask).map((r: any) => r.name))
 
   const formulae = pkgs.filter(p => formulaeSet.has(p)).sort()
   const casks = pkgs.filter(p => casksSet.has(p)).sort()
