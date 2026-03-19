@@ -1,7 +1,7 @@
 import postgres from 'postgres'
 
-const sql = postgres({
-  database: 'brewnite',
-})
+const sql = process.env.DATABASE_URL
+  ? postgres(process.env.DATABASE_URL)
+  : postgres({ database: 'brewnite' })
 
 export default sql
