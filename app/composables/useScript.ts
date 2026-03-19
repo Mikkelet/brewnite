@@ -20,12 +20,8 @@ export function useScript(selectedMeta: Ref<Map<string, BrewPackage>>) {
     formulae.sort()
     casks.sort()
 
-    let script = `#!/bin/bash
-
-# Brewnite install script
+    let script = `# Brewnite install script
 # Generated on ${new Date().toLocaleDateString()}
-
-set -e
 
 # Check if Homebrew is installed
 if ! command -v brew &> /dev/null; then
