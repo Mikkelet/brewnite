@@ -1,8 +1,8 @@
 <template>
-  <div v-if="show" class="script-section">
+  <div class="script-section">
     <div class="script-header">
       <h2>Install Script</h2>
-      <div class="script-actions">
+      <div v-if="hasSelection" class="script-actions">
         <button class="btn btn-ghost btn-small" @click="copyLink">
           {{ linkCopied ? '✓ Link copied!' : 'Share link' }}
         </button>
@@ -14,18 +14,23 @@
         </button>
       </div>
     </div>
-    <pre class="script"><code>{{ generatedScript }}</code></pre>
+    <div v-if="!hasSelection" class="script-empty">
+      <p>Select packages or a preset to generate your install script</p>
+    </div>
+    <pre v-else class="script"><code>{{ generatedScript }}</code></pre>
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   show: boolean
   generatedScript: string
   copied: boolean
   linkCopied: boolean
   oneLinerCopied: boolean
 }>()
+
+const hasSelection = computed(() => props.generatedScript.includes('brew install'))
 
 const emit = defineEmits<{
   copyScript: []
@@ -107,5 +112,12 @@ function copyOneLiner() {
 .btn-ghost:hover {
   background: #222;
   color: #ccc;
+}
+
+.script-empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #555;
+  font-size: 0.9rem;
 }
 </style>

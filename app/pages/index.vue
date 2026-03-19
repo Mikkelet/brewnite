@@ -44,7 +44,7 @@
       />
     </div>
 
-    <div v-if="selectedPackages.size > 0" class="script-column">
+    <div class="script-column">
       <div class="script-sticky">
         <ScriptPreview
           :show="true"
@@ -60,7 +60,7 @@
     </div>
 
     <!-- Mobile: show script below everything -->
-    <div v-if="selectedPackages.size > 0" class="script-mobile">
+    <div class="script-mobile">
       <ScriptPreview
         :show="true"
         :generated-script="generatedScript"
