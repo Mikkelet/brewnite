@@ -3,6 +3,13 @@
     <header>
       <h1>🍺 Brewnite</h1>
       <p class="subtitle">Select homebrew packages and generate an install script</p>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
       <a
         href="https://buymeacoffee.com/mikkelthygesen"
         target="_blank"
@@ -11,11 +18,7 @@
       >
         ☕ Buy me a coffee
       </a>
-    </header>
-
-    <main>
-      <slot />
-    </main>
+    </footer>
   </div>
 </template>
 
@@ -42,9 +45,15 @@ header h1 {
   font-size: 1.1rem;
 }
 
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem 0;
+  border-top: 1px solid #333;
+}
+
 .bmc-button {
   display: inline-block;
-  margin-top: 0.75rem;
   padding: 0.5rem 1rem;
   background: #ffdd00;
   color: #000;
