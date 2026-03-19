@@ -1,7 +1,6 @@
 <template>
-  <div v-if="pending" class="loading">Loading packages...</div>
 
-  <div v-else class="package-list">
+  <div class="package-list">
     <div class="packages">
       <PackageCard
         v-for="pkg in packages"

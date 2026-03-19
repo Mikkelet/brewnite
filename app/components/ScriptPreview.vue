@@ -6,6 +6,9 @@
         <button class="btn btn-ghost btn-small" @click="copyLink">
           {{ linkCopied ? '✓ Link copied!' : 'Share link' }}
         </button>
+        <button class="btn btn-ghost btn-small" @click="copyOneLiner">
+          {{ oneLinerCopied ? '✓ Copied!' : 'Copy one-liner' }}
+        </button>
         <button class="btn" @click="copyScript">
           {{ copied ? '✓ Copied!' : 'Copy script' }}
         </button>
@@ -21,11 +24,13 @@ defineProps<{
   generatedScript: string
   copied: boolean
   linkCopied: boolean
+  oneLinerCopied: boolean
 }>()
 
 const emit = defineEmits<{
   copyScript: []
   copyLink: []
+  copyOneLiner: []
 }>()
 
 function copyScript() {
@@ -35,11 +40,14 @@ function copyScript() {
 function copyLink() {
   emit('copyLink')
 }
+
+function copyOneLiner() {
+  emit('copyOneLiner')
+}
 </script>
 
 <style scoped>
 .script-section {
-  margin-top: 2rem;
   background: #141414;
   border: 1px solid #222;
   border-radius: 8px;
