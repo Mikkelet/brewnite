@@ -34,11 +34,18 @@ defineEmits<{
 
 <style scoped>
 .selected-section {
-  margin-bottom: 1rem;
-  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  padding: 0.6rem 0.75rem;
   background: #141414;
   border: 1px solid #222;
   border-radius: 8px;
+}
+
+@media (min-width: 768px) {
+  .selected-section {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+  }
 }
 
 .selected-header {

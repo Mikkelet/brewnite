@@ -85,8 +85,8 @@ const { presets } = usePresets()
 <style scoped>
 .page-layout {
   display: flex;
-  gap: 2rem;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .main-column {
@@ -105,6 +105,11 @@ const { presets } = usePresets()
 
 /* Desktop: side-by-side layout */
 @media (min-width: 1024px) {
+  .page-layout {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
   .script-column {
     display: block;
     width: 380px;

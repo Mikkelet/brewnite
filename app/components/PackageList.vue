@@ -110,10 +110,18 @@ const matchingPresets = computed(() => {
 }
 
 .packages {
-  padding: 0.25rem 0.5rem 0.5rem;
+  padding: 0.25rem 0.35rem 0.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 0.25rem;
+  grid-template-columns: 1fr;
+  gap: 0.15rem;
+}
+
+@media (min-width: 640px) {
+  .packages {
+    padding: 0.25rem 0.5rem 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0.25rem;
+  }
 }
 
 /* Preset search results */
@@ -132,8 +140,15 @@ const matchingPresets = computed(() => {
 
 .preset-results-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
+}
+
+@media (min-width: 640px) {
+  .preset-results-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.5rem;
+  }
 }
 
 .preset-result {
@@ -206,13 +221,25 @@ const matchingPresets = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.5rem;
+  padding: 0.75rem 0.5rem;
 }
 
 .page-info {
   color: #888;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .pagination {
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .page-info {
+    font-size: 0.85rem;
+  }
 }
 
 .btn {

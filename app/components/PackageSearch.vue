@@ -49,32 +49,46 @@ defineEmits<{
 .controls {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  margin-bottom: 1rem;
-  padding: 0.75rem 1rem;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.6rem 0.75rem;
   background: #1a1a1a;
   border-radius: 8px;
 }
 
 .search-wrapper {
   flex: 1;
-  min-width: 200px;
+  min-width: 0;
   position: relative;
 }
 
 .search {
   width: 100%;
-  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  padding: 0.6rem 2rem 0.6rem 0.75rem;
   background: #0a0a0a;
   border: 1px solid #333;
   border-radius: 6px;
   color: #e0e0e0;
-  font-size: 0.9rem;
+  font-size: 16px; /* prevents iOS zoom on focus */
   outline: none;
+  -webkit-appearance: none;
 }
 
 .search:focus {
   border-color: #f5a623;
+}
+
+@media (min-width: 768px) {
+  .controls {
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .search {
+    font-size: 0.9rem;
+    padding: 0.5rem 2rem 0.5rem 0.75rem;
+  }
 }
 
 .search-spinner {

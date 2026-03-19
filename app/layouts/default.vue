@@ -26,29 +26,29 @@
 .app {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 1rem 0.75rem;
 }
 
 header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 header h1 {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   color: #f5a623;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .subtitle {
   color: #888;
-  font-size: 1.1rem;
+  font-size: 0.85rem;
 }
 
 footer {
   text-align: center;
-  margin-top: 3rem;
-  padding: 2rem 0;
+  margin-top: 2rem;
+  padding: 1.5rem 0;
   border-top: 1px solid #333;
 }
 
@@ -66,5 +66,29 @@ footer {
 
 .bmc-button:hover {
   background: #e5c700;
+}
+
+@media (min-width: 768px) {
+  .app {
+    padding: 2rem 1rem;
+  }
+
+  header {
+    margin-bottom: 2rem;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  footer {
+    margin-top: 3rem;
+    padding: 2rem 0;
+  }
 }
 </style>

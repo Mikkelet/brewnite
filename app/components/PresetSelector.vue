@@ -63,16 +63,16 @@ const hiddenCount = computed(() => {
 
 .preset-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.4rem;
 }
 
 .preset-card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.2rem;
-  padding: 0.75rem;
+  gap: 0.15rem;
+  padding: 0.6rem;
   background: #141414;
   border: 1px solid #222;
   border-radius: 8px;
@@ -81,6 +81,18 @@ const hiddenCount = computed(() => {
   text-align: left;
   color: #e0e0e0;
   font-family: inherit;
+}
+
+@media (min-width: 768px) {
+  .preset-grid {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .preset-card {
+    padding: 0.75rem;
+    gap: 0.2rem;
+  }
 }
 
 .preset-card:hover {

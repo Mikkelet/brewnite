@@ -30,12 +30,20 @@ defineEmits<{
 <style scoped>
 .package {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 0.75rem;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.45rem 0.5rem;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.1s;
+}
+
+@media (min-width: 640px) {
+  .package {
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
 }
 
 .package:hover {
@@ -49,9 +57,18 @@ defineEmits<{
 
 .package input[type="checkbox"] {
   accent-color: #f5a623;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+@media (min-width: 640px) {
+  .package input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 0;
+  }
 }
 
 .package-info {

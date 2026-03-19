@@ -61,26 +61,52 @@ function copyOneLiner() {
 
 .script-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
   border-bottom: 1px solid #222;
 }
 
 .script-header h2 {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .script-actions {
   display: flex;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 
 .script {
-  padding: 1rem;
+  padding: 0.75rem;
   overflow-x: auto;
-  font-size: 0.85rem;
-  line-height: 1.5;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 768px) {
+  .script-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    gap: 0;
+  }
+
+  .script-header h2 {
+    font-size: 1rem;
+  }
+
+  .script-actions {
+    gap: 0.5rem;
+  }
+
+  .script {
+    padding: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
 }
 
 .script code {
