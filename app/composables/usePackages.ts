@@ -3,9 +3,18 @@ import type { ApiResponse, PackageType } from '~/types'
 export function usePackages() {
   const search = ref('')
   const debouncedSearch = ref('')
-  const typeFilter = ref<PackageType>('all')
+  const showFormulae = ref(true)
+  const showCasks = ref(true)
+  const showPresets = ref(true)
   const currentPage = ref(1)
   const pageSize = 50
+
+  const typeFilter = computed<PackageType>(() => {
+    if (showFormulae.value && showCasks.value) return 'all'
+    if (showFormulae.value) return 'formulae'
+    if (showCasks.value) return 'casks'
+    return 'all'
+  })
 
   let debounceTimer: ReturnType<typeof setTimeout> | null = null
   watch(search, (val) => {
@@ -38,6 +47,9 @@ export function usePackages() {
   return {
     search,
     typeFilter,
+    showFormulae,
+    showCasks,
+    showPresets,
     currentPage,
     isSearching,
     pending,

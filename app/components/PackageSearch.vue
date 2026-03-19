@@ -10,20 +10,19 @@
       />
       <span v-if="isSearching" class="search-spinner"></span>
     </div>
-    <div class="control-buttons">
-      <select
-        :value="typeFilter"
-        @change="$emit('update:typeFilter', ($event.target as HTMLSelectElement).value)"
-        class="type-select"
-      >
-        <option value="all">All</option>
-        <option value="formulae">Formulae</option>
-        <option value="casks">Casks</option>
-      </select>
-      <span class="selected-count">{{ selectedCount }} selected</span>
-      <button class="btn btn-small" @click="$emit('clear')" :disabled="selectedCount === 0">
-        Clear
-      </button>
+    <div class="filter-row">
+      <label class="filter-check" :class="{ active: showFormulae }">
+        <input type="checkbox" :checked="showFormulae" @change="$emit('update:showFormulae', !showFormulae)" />
+        <span>Formulae</span>
+      </label>
+      <label class="filter-check" :class="{ active: showCasks }">
+        <input type="checkbox" :checked="showCasks" @change="$emit('update:showCasks', !showCasks)" />
+        <span>Casks</span>
+      </label>
+      <label class="filter-check" :class="{ active: showPresets }">
+        <input type="checkbox" :checked="showPresets" @change="$emit('update:showPresets', !showPresets)" />
+        <span>Presets</span>
+      </label>
     </div>
   </div>
 </template>
@@ -31,25 +30,26 @@
 <script setup lang="ts">
 defineProps<{
   search: string
-  typeFilter: string
+  showFormulae: boolean
+  showCasks: boolean
+  showPresets: boolean
   totalPackages: number
-  selectedCount: number
   isSearching: boolean
 }>()
 
 defineEmits<{
   'update:search': [value: string]
-  'update:typeFilter': [value: string]
-  clear: []
+  'update:showFormulae': [value: boolean]
+  'update:showCasks': [value: boolean]
+  'update:showPresets': [value: boolean]
 }>()
 </script>
 
 <style scoped>
 .controls {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.6rem;
   margin-bottom: 1rem;
   padding: 0.75rem 1rem;
   background: #1a1a1a;
@@ -94,50 +94,33 @@ defineEmits<{
   to { transform: translateY(-50%) rotate(360deg); }
 }
 
-.control-buttons {
+.filter-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
 }
 
-.selected-count {
-  color: #f5a623;
-  font-weight: 600;
-  font-size: 0.85rem;
-}
-
-.type-select {
-  background: #0a0a0a;
-  border: 1px solid #333;
-  border-radius: 6px;
-  color: #e0e0e0;
-  padding: 0.35rem 0.5rem;
-  font-size: 0.85rem;
-  outline: none;
-}
-
-.type-select:focus {
-  border-color: #f5a623;
-}
-
-.btn {
-  background: #f5a623;
-  color: #000;
-  border: none;
-  padding: 0.35rem 0.75rem;
-  border-radius: 6px;
-  font-weight: 600;
+.filter-check {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  color: #777;
+  transition: color 0.15s;
+  user-select: none;
 }
 
-.btn:hover {
-  background: #e6951a;
+.filter-check.active {
+  color: #e0e0e0;
 }
 
-.btn:disabled {
-  opacity: 0.4;
-  cursor: default;
+.filter-check input[type="checkbox"] {
+  accent-color: #f5a623;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
 }
+
 </style>

@@ -4,7 +4,7 @@
     <p class="presets-subtitle">Pick a preset to get started, then customize</p>
     <div class="preset-grid">
       <button
-        v-for="preset in presets"
+        v-for="preset in visiblePresets"
         :key="preset.id"
         class="preset-card"
         :class="{ active: activePreset === preset.id }"
@@ -16,20 +16,32 @@
         <span class="preset-count">{{ preset.packages.length }} packages</span>
       </button>
     </div>
+    <p v-if="hiddenCount > 0" class="more-text">and many more - search to find them</p>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { Preset } from '~/composables/usePresets'
 
-defineProps<{
+const props = defineProps<{
   presets: Preset[]
   activePreset: string | null
+  maxVisible?: number
 }>()
 
 defineEmits<{
   select: [preset: Preset]
 }>()
+
+const visiblePresets = computed(() => {
+  const max = props.maxVisible ?? 8
+  return props.presets.slice(0, max)
+})
+
+const hiddenCount = computed(() => {
+  const max = props.maxVisible ?? 8
+  return Math.max(0, props.presets.length - max)
+})
 </script>
 
 <style scoped>
@@ -102,5 +114,13 @@ defineEmits<{
   font-size: 0.7rem;
   color: #f5a623;
   margin-top: 0.15rem;
+}
+
+.more-text {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-style: italic;
 }
 </style>

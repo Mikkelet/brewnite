@@ -1,6 +1,31 @@
 <template>
 
   <div class="package-list">
+    <!-- Matching presets shown when searching -->
+    <div v-if="showPresets && search && matchingPresets.length > 0" class="preset-results">
+      <h3 class="preset-results-title">Presets</h3>
+      <div class="preset-results-grid">
+        <button
+          v-for="preset in matchingPresets"
+          :key="preset.id"
+          class="preset-result"
+          :class="{ active: activePreset === preset.id }"
+          @click="$emit('selectPreset', preset)"
+        >
+          <span class="preset-result-icon">{{ preset.icon }}</span>
+          <div class="preset-result-info">
+            <span class="preset-result-name">{{ preset.name }}</span>
+            <span class="preset-result-desc">{{ preset.description }}</span>
+            <span class="preset-result-count">{{ preset.packages.length }} packages</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div v-if="showPresets && search && matchingPresets.length > 0 && packages.length > 0" class="section-divider">
+      <h3 class="section-title">Packages</h3>
+    </div>
+
     <div class="packages">
       <PackageCard
         v-for="pkg in packages"
@@ -11,7 +36,7 @@
       />
     </div>
 
-    <div v-if="packages.length === 0" class="no-results">
+    <div v-if="packages.length === 0 && (!search || matchingPresets.length === 0)" class="no-results">
       No packages match "{{ search }}"
     </div>
 
@@ -31,8 +56,9 @@
 
 <script setup lang="ts">
 import type { BrewPackage } from '~/types'
+import type { Preset } from '~/composables/usePresets'
 
-defineProps<{
+const props = defineProps<{
   packages: BrewPackage[]
   selectedPackages: Set<string>
   pending: boolean
@@ -40,13 +66,27 @@ defineProps<{
   currentPage: number
   totalPages: number
   totalPackages: number
+  presets: Preset[]
+  activePreset: string | null
+  showPresets: boolean
 }>()
 
 defineEmits<{
   toggle: [pkg: BrewPackage]
   prevPage: []
   nextPage: []
+  selectPreset: [preset: Preset]
 }>()
+
+const matchingPresets = computed(() => {
+  const q = props.search.toLowerCase().trim()
+  if (!q) return []
+  return props.presets.filter(p =>
+    p.name.toLowerCase().includes(q) ||
+    p.description.toLowerCase().includes(q) ||
+    p.packages.some(pkg => pkg.name.toLowerCase().includes(q))
+  )
+})
 </script>
 
 <style scoped>
@@ -74,6 +114,92 @@ defineEmits<{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 0.25rem;
+}
+
+/* Preset search results */
+.preset-results {
+  padding: 0.75rem 0.75rem 0.5rem;
+}
+
+.preset-results-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.preset-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.5rem;
+}
+
+.preset-result {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: #1a1400;
+  border: 1px solid #332800;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  color: #e0e0e0;
+  font-family: inherit;
+}
+
+.preset-result:hover {
+  border-color: #f5a623;
+  background: #221a00;
+}
+
+.preset-result.active {
+  border-color: #f5a623;
+  background: #2a1f00;
+}
+
+.preset-result-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.preset-result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.preset-result-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.preset-result-desc {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.preset-result-count {
+  font-size: 0.7rem;
+  color: #f5a623;
+}
+
+/* Section divider */
+.section-divider {
+  padding: 0.5rem 0.75rem 0;
+}
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .pagination {

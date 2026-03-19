@@ -15,26 +15,32 @@
 
       <PackageSearch
         :search="search"
-        :type-filter="typeFilter"
+        :show-formulae="showFormulae"
+        :show-casks="showCasks"
+        :show-presets="showPresets"
         :total-packages="totalPackages"
-        :selected-count="selectedPackages.size"
         :is-searching="isSearching"
         @update:search="search = $event"
-        @update:type-filter="typeFilter = $event"
-        @clear="clearAll"
+        @update:show-formulae="showFormulae = $event"
+        @update:show-casks="showCasks = $event"
+        @update:show-presets="showPresets = $event"
       />
 
       <PackageList
-        :packages="packages"
+        :packages="showFormulae || showCasks ? packages : []"
         :selected-packages="selectedPackages"
         :pending="pending"
         :search="search"
         :current-page="currentPage"
-        :total-pages="totalPages"
+        :total-pages="showFormulae || showCasks ? totalPages : 0"
         :total-packages="totalPackages"
+        :presets="presets"
+        :active-preset="activePreset"
+        :show-presets="showPresets"
         @toggle="togglePackage"
         @prev-page="currentPage--"
         @next-page="currentPage++"
+        @select-preset="applyPreset"
       />
     </div>
 
@@ -70,7 +76,7 @@
 </template>
 
 <script setup lang="ts">
-const { search, typeFilter, currentPage, isSearching, pending, packages, totalPackages, totalPages } = usePackages()
+const { search, showFormulae, showCasks, showPresets, currentPage, isSearching, pending, packages, totalPackages, totalPages } = usePackages()
 const { selectedPackages, selectedMeta, selectedPackagesList, activePreset, togglePackage, clearAll, applyPreset } = useSelection()
 const { generatedScript, copied, linkCopied, oneLinerCopied, copyScript, copyLink, copyOneLiner } = useScript(selectedMeta)
 const { presets } = usePresets()
