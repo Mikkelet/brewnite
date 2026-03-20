@@ -711,6 +711,28 @@ export const presets: Preset[] = [
       { name: 'iterm2', cask: true },
     ],
   },
+  {
+    id: 'vibe-coder',
+    name: 'Vibe Coder',
+    icon: '✨',
+    description: 'AI IDEs & local model runners',
+    packages: [
+      { name: 'ollama', cask: false },
+      { name: 'aider', cask: false },
+      { name: 'claude-code', cask: false },
+      { name: 'llm', cask: false },
+      { name: 'git', cask: false },
+      { name: 'gh', cask: false },
+      { name: 'node', cask: false },
+      { name: 'cursor', cask: true },
+      { name: 'windsurf', cask: true },
+      { name: 'zed', cask: true },
+      { name: 'lm-studio', cask: true },
+      { name: 'jan', cask: true },
+      { name: 'open-webui', cask: true },
+      { name: 'iterm2', cask: true },
+    ],
+  },
 ]
 
 export function usePresets() {
