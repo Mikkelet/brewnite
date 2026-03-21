@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: brewnite
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_DB: brewnite
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
+      - ./db/03-import-json.sh:/docker-entrypoint-initdb.d/03-import-json.sh
+      - ./data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U brewnite"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      DATABASE_URL: postgresql://brewnite:changeme@db:5432/brewnite
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
