@@ -20,7 +20,7 @@ services:
   app:
     build: .
     ports:
-      - "4000:4000"
+      - "3000:4000"
     environment:
       DATABASE_URL: postgresql://brewnite:changeme@db:5432/brewnite
     depends_on:
