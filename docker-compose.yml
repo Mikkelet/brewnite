@@ -2,8 +2,8 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: brewnite
-      POSTGRES_PASSWORD: changeme
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: brewnite
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -22,7 +22,7 @@ services:
     ports:
       - "3000:4000"
     environment:
-      DATABASE_URL: postgresql://brewnite:changeme@db:5432/brewnite
+      DATABASE_URL: ${DB_URL}
     depends_on:
       db:
         condition: service_healthy
