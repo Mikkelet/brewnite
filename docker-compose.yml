@@ -6,7 +6,6 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: brewnite
     volumes:
-      - pgdata:/var/lib/postgresql/data
       - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
       - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
       - ./db/03-import-json.sh:/docker-entrypoint-initdb.d/03-import-json.sh
@@ -22,10 +21,7 @@ services:
     ports:
       - "3000:4000"
     environment:
-      DATABASE_URL: ${DB_URL}
+      DATABASE_URL: ${DATABASE_URL}
     depends_on:
       db:
         condition: service_healthy
-
-volumes:
-  pgdata:
